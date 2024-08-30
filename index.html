@@ -35,6 +35,16 @@
             background-color: rgba(0, 0, 0, 0.3); /* Gray, transparent layer */
             z-index: 2;
             pointer-events: none; /* Allows interaction with the underlying iframe */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            text-align: center;
         }
     </style>
 </head>
@@ -42,7 +52,7 @@
 
 <div class="container">
     <iframe id="contentFrame"></iframe>
-    <div class="overlay"></div>
+    <div class="overlay">SIDENOTE</div>
 </div>
 
 <script>
@@ -56,6 +66,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const url = getTargetUrl();
         if (url) {
+            console.log("Loading URL:", url); // Debugging line to check the URL
             document.getElementById('contentFrame').src = url;
         } else {
             document.body.innerHTML = '<h1>Please enter a valid URL after sidenote.live/</h1>';
