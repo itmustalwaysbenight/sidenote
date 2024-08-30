@@ -46,10 +46,10 @@
 </div>
 
 <script>
-    // Function to get the target URL from the path
+    // Function to get the target URL from the query string
     function getTargetUrl() {
-        const path = window.location.pathname.substring(1); // Remove leading '/'
-        return path ? `https://${path}` : null;
+        const queryString = window.location.search.substring(1); // Remove leading '?'
+        return queryString ? `https://${queryString}` : null;
     }
 
     // Load the target URL into the iframe
