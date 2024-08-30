@@ -3,10 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidenote</title>
+    <title>SideNote</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* Gray, transparent layer */
+            z-index: 2;
+            pointer-events: none; /* Allows interaction with the underlying iframe */
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Sidenote</h1>
-    <p>This is a simple landing page.</p>
+
+<div class="container">
+    <iframe id="contentFrame"></iframe>
+    <div class="overlay"></div>
+</div>
+
+<script>
+    // Function to get the target URL from the path
+    function getTargetUrl() {
+        const path = window.location.pathname.substring(1); // Remove leading '/'
+        return path ? `https://${path}` : null;
+    }
+
+    // Load the target URL into the iframe
+    document.addEventListener('DOMContentLoaded', () => {
+        const url = getTargetUrl();
+        if (url) {
+            document.getElementById('contentFrame').src = url;
+        } else {
+            document.body.innerHTML = '<h1>Please enter a valid URL after sidenote.live/</h1>';
+        }
+    });
+</script>
+
 </body>
 </html>
