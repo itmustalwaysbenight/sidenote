@@ -13,7 +13,7 @@
             --separator-gradient: linear-gradient(90deg, #ff0066, #0099ff, #00ff99);
         }
 
-        body.dark-mode {
+        body.darkness {
             --background-color: #121212;
             --text-color: #e0e0e0;
             --link-color: #bb86fc;
@@ -64,8 +64,8 @@
             margin-top: 40px;
         }
 
-        /* Minimalistic Sun/Moon Button Styling */
-        .dark-mode-toggle {
+        /* Firefly Button Styling */
+        .firefly {
             position: fixed;
             top: 20px;
             right: 20px;
@@ -76,23 +76,23 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.5s, box-shadow 0.5s;
-            box-shadow: 0 0 0 2px var(--text-color) inset, 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 0 2px var(--text-color) inset;
         }
 
-        /* Moon style when in dark mode */
-        body.dark-mode .dark-mode-toggle {
-            background-color: var(--text-color);
-            box-shadow: -10px -10px 0 2px var(--background-color) inset, 0 0 10px rgba(255, 255, 255, 0.2);
+        /* Glowing effect for firefly in darkness mode */
+        body.darkness .firefly {
+            background-color: #ffdd57; /* Firefly's glow */
+            box-shadow: 0 0 15px 10px rgba(255, 221, 87, 0.8); /* Glowing firefly */
         }
 
-        .dark-mode-toggle:hover {
-            box-shadow: 0 0 0 4px var(--text-color) inset, 0 0 12px rgba(0, 0, 0, 0.3);
+        .firefly:hover {
+            box-shadow: 0 0 15px 8px rgba(255, 221, 87, 0.8); /* Slightly larger glow on hover */
         }
     </style>
 </head>
 <body>
-    <!-- Minimalistic Button for Dark Mode Toggle -->
-    <button class="dark-mode-toggle" id="darkModeToggle"></button>
+    <!-- Firefly Button for Darkness/Light Toggle -->
+    <button class="firefly" id="darkModeToggle"></button>
 
     <header>
         <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
@@ -108,15 +108,15 @@
         const toggleButton = document.getElementById('darkModeToggle');
         const body = document.body;
 
-        // Check if dark mode is already enabled in localStorage
+        // Check if darkness mode is already enabled in localStorage
         if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
+            body.classList.add('darkness');
         }
 
-        // Event listener for dark mode toggle button
+        // Event listener for darkness toggle button
         toggleButton.addEventListener('click', function() {
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
+            body.classList.toggle('darkness');
+            if (body.classList.contains('darkness')) {
                 localStorage.setItem('darkMode', 'enabled');
             } else {
                 localStorage.setItem('darkMode', 'disabled');
