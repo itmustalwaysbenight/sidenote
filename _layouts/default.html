@@ -81,6 +81,55 @@
         .dark-mode-toggle:hover {
             background-color: #45a049;
         }
+
+        /* External link block styling */
+        .external-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .external-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .external-link a:hover {
+            background-color: #45a049;
+        }
+
+        .external-link a:active {
+            background-color: #3e8e41;
+        }
+
+        .external-link a.nolink {
+            background-color: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        body.dark-mode .external-link a {
+            background-color: #03dac6;
+            color: black;
+        }
+
+        body.dark-mode .external-link a:hover {
+            background-color: #00bfa5;
+        }
+
+        body.dark-mode .external-link a:active {
+            background-color: #00a693;
+        }
+
+        body.dark-mode .external-link a.nolink {
+            background-color: #666;
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +138,6 @@
     <header>
         <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
     </header>
-    
 
     <main>
         {{ content }}

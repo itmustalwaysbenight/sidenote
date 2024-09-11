@@ -2,6 +2,7 @@
 layout: post
 title: "Karpathy: LLM predictions"
 date: 2024-09-11
+external_url: "https://youtu.be/hM_h0UA7upI?si=G8hvb6j9ZzpzgOoh"
 ---
 
 # Predictions on the Future of Large Language Models: Insights from Andrej Karpathy
