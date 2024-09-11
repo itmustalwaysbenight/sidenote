@@ -47,7 +47,7 @@ layout: default
         {% for post in site.posts %}
         <article>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <p>{{ post.excerpt | truncatewords: 50 }}</p> <!-- Still truncating to 50 words -->
+            <p>{{ post.excerpt | truncatewords: 100 }}</p> <!-- Still truncating to 50 words -->
             <p><a href="{{ post.url }}">Read more...</a></p>
         </article>
         {% endfor %}
