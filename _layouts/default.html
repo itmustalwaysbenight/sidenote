@@ -5,56 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --link-color: black;
+            --link-hover-color: #4CAF50;
+            --separator-gradient: linear-gradient(90deg, #ff0066, #0099ff, #00ff99);
+        }
+
+        body.dark-mode {
+            --background-color: #121212;
+            --text-color: #e0e0e0;
+            --link-color: #bb86fc;
+            --link-hover-color: #03dac6;
+            --separator-gradient: linear-gradient(90deg, #ff0066, #00ffcc, #00ff66);
+        }
+
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
         }
-        header h1 {
-            font-size: 2rem;
-            text-align: center;
+
+        h1, h2, h3 {
+            font-family: 'Arial', sans-serif;
         }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+
+        a, a:visited, a:active {
+            color: var(--link-color) !important; /* Dynamic link color */
+            text-decoration: none !important; /* Removes underline */
+        }
+
+        a:hover {
+            color: var(--link-hover-color) !important; /* Hover color */
+            text-decoration: none !important;
+        }
+
+        .separator {
+            height: 3px;
+            background: var(--separator-gradient);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 1.5px;
+        }
+
         footer {
             text-align: center;
             margin-top: 40px;
         }
-        /* Ensure hover behavior works for all links */
-        a, a:visited, a:active {
-            color: black !important; /* Default link color */
-            text-decoration: none !important; /* Removes underline */
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
         }
-        a:hover {
-            color: #4CAF50 !important; /* Hover color */
-            text-decoration: none !important; /* No underline on hover */
+
+        .dark-mode-toggle:hover {
+            background-color: #45a049;
         }
     </style>
-    
-    
-    <script type="text/javascript" async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
-    <script>
-      window.onload = function() {
-        // Force the browser to reload CSS
-        const links = document.querySelectorAll('link[rel="stylesheet"]');
-        links.forEach(link => {
-          const href = link.getAttribute('href');
-          link.setAttribute('href', href + '?v=' + new Date().getTime());
-        });
-      }
-    </script>
 </head>
 <body>
+    <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+
     <header>
-        <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
+        <h1><a href="{{ site.baseurl }}">{{ site.title }}</a></h1>
     </header>
+
     <main>
         {{ content }}
     </main>
+
     <footer>
-     
     </footer>
+
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        // Check if dark mode is already enabled in localStorage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggleButton.textContent = 'Light Mode';
+        }
+
+        toggleButton.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            if(body.classList.contains('dark-mode')) {
+                toggleButton.textContent = 'Light Mode';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                toggleButton.textContent = 'Dark Mode';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
+
+    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </body>
 </html>
