@@ -42,12 +42,12 @@
         }
 
         a, a:visited, a:active {
-            color: var(--link-color) !important; /* Dynamic link color */
-            text-decoration: none !important; /* Removes underline */
+            color: var(--link-color) !important;
+            text-decoration: none !important;
         }
 
         a:hover {
-            color: var(--link-hover-color) !important; /* Hover color */
+            color: var(--link-hover-color) !important;
             text-decoration: none !important;
         }
 
@@ -94,8 +94,7 @@
         {{ content }}
     </main>
 
-    <footer>
-    </footer>
+    <footer></footer>
 
     <script>
         const toggleButton = document.getElementById('darkModeToggle');
@@ -107,9 +106,10 @@
             toggleButton.textContent = 'Light Mode';
         }
 
+        // Event listener for dark mode toggle button
         toggleButton.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
-            if(body.classList.contains('dark-mode')) {
+            if (body.classList.contains('dark-mode')) {
                 toggleButton.textContent = 'Light Mode';
                 localStorage.setItem('darkMode', 'enabled');
             } else {

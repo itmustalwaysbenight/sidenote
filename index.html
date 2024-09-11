@@ -51,26 +51,10 @@ layout: default
         body.dark-mode pre {
             background-color: #333;
         }
-        button.dark-mode-toggle {
-            position: fixed;
-            top: 10px;
-            right: 20px;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
-    <!-- Dark mode toggle button -->
-    <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
-
-    <header>
-    </header>
+    <header></header>
 
     <main>
         {% for post in site.posts %}
@@ -83,32 +67,7 @@ layout: default
         {% endfor %}
     </main>
 
-    <footer>
-    </footer>
-
-    <script>
-        // Function to toggle dark mode
-        const toggleButton = document.getElementById('darkModeToggle');
-        const body = document.body;
-
-        // Check if dark mode is already enabled in localStorage
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
-            toggleButton.textContent = 'Light Mode';
-        }
-
-        // Event listener for dark mode toggle button
-        toggleButton.addEventListener('click', function() {
-            body.classList.toggle('dark-mode');
-            if(body.classList.contains('dark-mode')) {
-                toggleButton.textContent = 'Light Mode';
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                toggleButton.textContent = 'Dark Mode';
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-    </script>
+    <footer></footer>
 
     <script type="text/javascript" async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
