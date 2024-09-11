@@ -9,61 +9,94 @@ layout: default
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidenote</title>
     <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --link-color: black;
+            --link-hover-color: #4CAF50;
+            --separator-gradient: linear-gradient(90deg, #ff0066, #0099ff, #00ff99);
+        }
+
+        body.dark-mode {
+            --background-color: #121212;
+            --text-color: #e0e0e0;
+            --link-color: #bb86fc;
+            --link-hover-color: #03dac6;
+            --separator-gradient: linear-gradient(90deg, #ff0066, #00ffcc, #00ff66);
+        }
+
         body {
             font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
         }
+
         h1, h2, h3 {
             font-family: 'Arial', sans-serif;
         }
+
         pre {
             background-color: #f4f4f4;
             padding: 10px;
         }
+
         a, a:visited, a:active {
-            color: black !important; /* Link color */
+            color: var(--link-color) !important; /* Dynamic link color */
             text-decoration: none !important; /* Removes underline */
         }
-        a:hover {
-            color: #4CAF50 !important; /* Hover color */
-            text-decoration: none !important; /* Keeps it without underline on hover */
-        }
 
-        /* Creative separation of posts */
-        article {
-            margin-bottom: 40px; /* Space between posts */
+        a:hover {
+            color: var(--link-hover-color) !important; /* Hover color */
+            text-decoration: none !important;
         }
 
         /* Modern AI-inspired gradient line */
         .separator {
             height: 3px;
-            background: linear-gradient(90deg, #ff0066, #0099ff, #00ff99); /* Colorful modern gradient */
+            background: var(--separator-gradient); /* Dynamic gradient */
             margin-top: 20px;
             margin-bottom: 20px;
-            border-radius: 1.5px; /* Slightly rounded edges for a soft feel */
+            border-radius: 1.5px;
         }
 
-        /* Post title adjustments */
-        article h3 {
-            font-size: 1.8rem; /* Larger post title */
-            margin-bottom: 10px;
+        article {
+            margin-bottom: 40px;
         }
 
-        /* Additional space for the footer */
+        /* Footer with space */
         footer {
             text-align: center;
             margin-top: 40px;
         }
+
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #45a049;
+        }
     </style>
-    
-    <script type="text/javascript" async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
 </head>
 <body>
+    <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+
     <header>
         <!-- Removed Home link as it is redundant -->
     </header>
@@ -80,8 +113,21 @@ layout: default
     </main>
 
     <footer>
-    
     </footer>
+
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            if(body.classList.contains('dark-mode')) {
+                toggleButton.textContent = 'Light Mode';
+            } else {
+                toggleButton.textContent = 'Dark Mode';
+            }
+        });
+    </script>
 
     <script type="text/javascript" async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
