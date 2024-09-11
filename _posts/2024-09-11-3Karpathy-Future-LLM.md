@@ -1,3 +1,9 @@
+---
+layout: post
+title: "Karpathy: LLM predictions"
+date: 2024-09-11
+---
+
 # Predictions on the Future of Large Language Models: Insights from Andrej Karpathy
 
 In a recent conversation with Andrej Karpathy, a leading figure in AI, several fascinating predictions about the future of Large Language Models (LLMs) and AI technology were discussed. Here are some of the key takeaways:
