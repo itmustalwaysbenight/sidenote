@@ -32,32 +32,25 @@ layout: default
             text-decoration: none !important; /* Keeps it without underline on hover */
         }
     </style>
-    
+
     <script type="text/javascript" async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
 </head>
 <body>
-    <header>
-        <!-- Removed Home link as it is redundant -->
-    </header>
+    <header></header>
 
     <main>
+        <!-- Removed extra header lines, post titles act as headers now -->
         {% for post in site.posts %}
         <article>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <p>{{ post.content | truncatewords: 100 }}</p> <!-- Keep truncation at 50 words -->
+            <p>{{ post.content | truncatewords: 50 }}</p> <!-- Keep truncation at 50 words -->
             <p><a href="{{ post.url }}">Read more...</a></p>
         </article>
         {% endfor %}
     </main>
 
-    <footer>
-    
-    </footer>
-
-    <script type="text/javascript" async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
+    <footer></footer>
 </body>
 </html>
