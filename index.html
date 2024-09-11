@@ -9,88 +9,34 @@ layout: default
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidenote</title>
     <style>
-        :root {
-            --background-color: white;
-            --text-color: black;
-            --link-color: black;
-            --link-hover-color: #4CAF50;
-            --separator-gradient: linear-gradient(90deg, #ff0066, #0099ff, #00ff99);
-        }
-
-        body.dark-mode {
-            --background-color: #121212;
-            --text-color: #e0e0e0;
-            --link-color: #bb86fc;
-            --link-hover-color: #03dac6;
-            --separator-gradient: linear-gradient(90deg, #ff0066, #00ffcc, #00ff66);
-        }
-
         body {
             font-family: Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
-            transition: background-color 0.5s, color 0.5s;
         }
-
         h1, h2, h3 {
             font-family: 'Arial', sans-serif;
         }
-
         pre {
             background-color: #f4f4f4;
             padding: 10px;
         }
-
         a, a:visited, a:active {
-            color: var(--link-color) !important; /* Dynamic link color */
+            color: black !important; /* Link color */
             text-decoration: none !important; /* Removes underline */
         }
-
         a:hover {
-            color: var(--link-hover-color) !important; /* Hover color */
-            text-decoration: none !important;
+            color: #4CAF50 !important; /* Hover color */
+            text-decoration: none !important; /* Keeps it without underline on hover */
         }
-
-        /* Modern AI-inspired gradient line */
         .separator {
             height: 3px;
-            background: var(--separator-gradient); /* Dynamic gradient */
+            background: var(--separator-gradient);
             margin-top: 20px;
             margin-bottom: 20px;
             border-radius: 1.5px;
-        }
-
-        article {
-            margin-bottom: 40px;
-        }
-
-        /* Footer with space */
-        footer {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        /* Dark mode toggle button */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
-        }
-
-        .dark-mode-toggle:hover {
-            background-color: #45a049;
         }
     </style>
 </head>
@@ -105,10 +51,10 @@ layout: default
         {% for post in site.posts %}
         <article>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <p>{{ post.content | truncatewords: 100 }}</p> <!-- Keep truncation at 100 words -->
+            <p>{{ post.content | truncatewords: 100 }}</p>
             <p><a href="{{ post.url }}">Read more...</a></p>
         </article>
-        <div class="separator"></div> <!-- Colorful modern separator line -->
+        <div class="separator"></div>
         {% endfor %}
     </main>
 
@@ -119,12 +65,20 @@ layout: default
         const toggleButton = document.getElementById('darkModeToggle');
         const body = document.body;
 
+        // Check if dark mode is already enabled in localStorage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggleButton.textContent = 'Light Mode';
+        }
+
         toggleButton.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
             if(body.classList.contains('dark-mode')) {
                 toggleButton.textContent = 'Light Mode';
+                localStorage.setItem('darkMode', 'enabled');
             } else {
                 toggleButton.textContent = 'Dark Mode';
+                localStorage.setItem('darkMode', 'disabled');
             }
         });
     </script>
