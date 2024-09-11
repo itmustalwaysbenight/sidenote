@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +16,7 @@
             padding: 20px;
             line-height: 1.6;
         }
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3 {
             font-family: 'Arial', sans-serif;
         }
         pre {
@@ -28,28 +32,27 @@
         }
     </style>
     <script type="text/javascript" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
 </head>
 <body>
     <header>
-        <h1>Sidenote</h1>
         <nav>
             <a href="/">Home</a>
         </nav>
     </header>
-    
+
     <main>
         <h2>Latest Posts</h2>
         {% for post in site.posts %}
         <article>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <p>{{ post.excerpt }}</p>
+            <p>{{ post.content | truncatewords: 50 }}</p> <!-- Limits to 50 words -->
             <p><a href="{{ post.url }}">Read more...</a></p>
         </article>
         {% endfor %}
     </main>
-    
+
     <footer>
     
     </footer>

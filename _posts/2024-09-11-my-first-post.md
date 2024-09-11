@@ -12,6 +12,8 @@ Here’s a LaTeX example:
 
 Inline formula: \\( \mathbf{A} \cdot \mathbf{B} = \sum_{i=1}^{n} a_i b_i \\)
 
+<!--more-->
+
 Block formula:
 $$
 \mathbf{A} \cdot \mathbf{B} = |\mathbf{A}| |\mathbf{B}| \cos(\theta)
