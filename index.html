@@ -15,6 +15,7 @@ layout: default
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         h1, h2, h3 {
             font-family: 'Arial', sans-serif;
@@ -24,27 +25,51 @@ layout: default
             padding: 10px;
         }
         a, a:visited, a:active {
-            color: black !important; /* Link color */
-            text-decoration: none !important; /* Removes underline */
+            color: black !important;
+            text-decoration: none !important;
         }
         a:hover {
-            color: #4CAF50 !important; /* Hover color */
-            text-decoration: none !important; /* Keeps it without underline on hover */
+            color: #4CAF50 !important;
+            text-decoration: none !important;
         }
         .separator {
             height: 3px;
-            background: var(--separator-gradient);
+            background: linear-gradient(to right, #ff5f6d, #ffc371);
             margin-top: 20px;
             margin-bottom: 20px;
             border-radius: 1.5px;
         }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        body.dark-mode a {
+            color: #bbbbbb !important;
+        }
+        body.dark-mode pre {
+            background-color: #333;
+        }
+        button.dark-mode-toggle {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+    <!-- Dark mode toggle button -->
     <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
 
     <header>
-        <!-- Removed Home link as it is redundant -->
     </header>
 
     <main>
@@ -62,6 +87,7 @@ layout: default
     </footer>
 
     <script>
+        // Function to toggle dark mode
         const toggleButton = document.getElementById('darkModeToggle');
         const body = document.body;
 
@@ -71,6 +97,7 @@ layout: default
             toggleButton.textContent = 'Light Mode';
         }
 
+        // Event listener for dark mode toggle button
         toggleButton.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
             if(body.classList.contains('dark-mode')) {
