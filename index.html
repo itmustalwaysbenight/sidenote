@@ -39,13 +39,11 @@ layout: default
 </head>
 <body>
     <header>
-        <nav>
-            <a href="/">Home</a>
-        </nav>
+        <!-- Removed Home link as it is redundant -->
     </header>
 
     <main>
-        <h2>Latest Posts</h2>
+        <!-- Removed "Latest Posts" heading -->
         {% for post in site.posts %}
         <article>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
