@@ -64,78 +64,35 @@
             margin-top: 40px;
         }
 
+        /* Minimalistic Sun/Moon Button Styling */
         .dark-mode-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: transparent;
+            width: 40px;
+            height: 40px;
+            background-color: var(--text-color);
+            border-radius: 50%;
             border: none;
-            font-size: 30px;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            color: var(--text-color);
+            transition: background-color 0.5s, box-shadow 0.5s;
+            box-shadow: 0 0 0 2px var(--text-color) inset, 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Moon style when in dark mode */
+        body.dark-mode .dark-mode-toggle {
+            background-color: var(--text-color);
+            box-shadow: -10px -10px 0 2px var(--background-color) inset, 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .dark-mode-toggle:hover {
-            transform: scale(1.2);
-        }
-
-        body.dark-mode .dark-mode-toggle {
-            color: #fff;
-        }
-
-        /* External link block styling */
-        .external-link {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .external-link a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
-        }
-
-        .external-link a:hover {
-            background-color: #45a049;
-        }
-
-        .external-link a:active {
-            background-color: #3e8e41;
-        }
-
-        .external-link a.nolink {
-            background-color: #ccc;
-            color: #888;
-            cursor: not-allowed;
-        }
-
-        body.dark-mode .external-link a {
-            background-color: #03dac6;
-            color: black;
-        }
-
-        body.dark-mode .external-link a:hover {
-            background-color: #00bfa5;
-        }
-
-        body.dark-mode .external-link a:active {
-            background-color: #00a693;
-        }
-
-        body.dark-mode .external-link a.nolink {
-            background-color: #666;
-            color: #bbb;
+            box-shadow: 0 0 0 4px var(--text-color) inset, 0 0 12px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
+    <!-- Minimalistic Button for Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle"></button>
 
     <header>
         <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
@@ -150,28 +107,22 @@
     <script>
         const toggleButton = document.getElementById('darkModeToggle');
         const body = document.body;
-    
+
         // Check if dark mode is already enabled in localStorage
         if (localStorage.getItem('darkMode') === 'enabled') {
             body.classList.add('dark-mode');
-            toggleButton.textContent = '☀️'; // Show sun icon in dark mode
-        } else {
-            toggleButton.textContent = '🌙'; // Show moon icon in light mode
         }
-    
+
         // Event listener for dark mode toggle button
         toggleButton.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
             if (body.classList.contains('dark-mode')) {
-                toggleButton.textContent = '☀️'; // Show sun icon when dark mode is on
                 localStorage.setItem('darkMode', 'enabled');
             } else {
-                toggleButton.textContent = '🌙'; // Show moon icon when light mode is on
                 localStorage.setItem('darkMode', 'disabled');
             }
         });
     </script>
-    
 
     <script type="text/javascript" async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
