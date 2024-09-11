@@ -31,6 +31,38 @@ layout: default
             color: #4CAF50 !important; /* Hover color */
             text-decoration: none !important; /* Keeps it without underline on hover */
         }
+
+        /* Separation of posts */
+        article {
+            margin-bottom: 40px; /* Adds space between posts */
+            padding: 20px; /* Adds padding around each post */
+            border-bottom: 1px solid #e0e0e0; /* Subtle border under each post */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        /* Post title adjustments */
+        article h3 {
+            font-size: 1.8rem; /* Larger post title */
+            margin-bottom: 10px;
+        }
+
+        /* Date or metadata styling */
+        .date {
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem; /* Smaller and less emphasized */
+        }
+
+        /* Paragraph adjustments for readability */
+        article p {
+            line-height: 1.8; /* Slightly larger line height for readability */
+        }
+
+        /* Additional space for the footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+        }
     </style>
     
     <script type="text/javascript" async
@@ -46,7 +78,7 @@ layout: default
         {% for post in site.posts %}
         <article>
             <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <p>{{ post.content | truncatewords: 100 }}</p> <!-- Keep truncation at 50 words -->
+            <p>{{ post.content | truncatewords: 100 }}</p> <!-- Truncation at 100 words -->
             <p><a href="{{ post.url }}">Read more...</a></p>
         </article>
         {% endfor %}
