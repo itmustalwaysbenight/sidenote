@@ -2,6 +2,7 @@
 layout: post
 title: "Understanding Transformers"
 date: 2024-09-12
+external_url: "https://youtu.be/eMlx5fFNoYc?si=0VUdxPMFLK03gqRf"
 ---
 
 # Summary of Attention in Transformers, Visually Explained

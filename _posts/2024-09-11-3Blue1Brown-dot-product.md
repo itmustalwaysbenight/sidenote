@@ -2,6 +2,7 @@
 layout: post
 title: "3Blue1Brown: dot product"
 date: 2024-09-11
+external_url: "https://youtu.be/LyGKycYT2v0?si=ZMmc6FlWaiuY0GPo"
 ---
 
 # Dot Product: Key Insights

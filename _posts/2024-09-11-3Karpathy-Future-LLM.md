@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Karpathy: LLM predictions"
+title: "The Future of LLMs"
 date: 2024-09-11
 external_url: "https://youtu.be/hM_h0UA7upI?si=G8hvb6j9ZzpzgOoh"
 ---
