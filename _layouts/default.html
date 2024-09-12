@@ -15,7 +15,7 @@
 
         body.dark-mode {
             --background-color: #121212;
-            --text-color: #e0e0e0;
+            --text-color: white; /* Now this ensures white text in dark mode */
             --link-color: #bb86fc;
             --link-hover-color: #03dac6;
             --separator-gradient: linear-gradient(90deg, #ff0066, #00ffcc, #00ff66);
@@ -69,13 +69,13 @@
             top: 20px;
             right: 20px;
             background-color: #4CAF50;
-            color: white;
+            color: var(--text-color); /* Ensure text color follows the mode */
             border: none;
             border-radius: 20px;
             padding: 10px 20px;
             cursor: pointer;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .dark-mode-toggle:hover {
@@ -92,16 +92,15 @@
             display: inline-block;
             padding: 10px 20px;
             background-color: #4CAF50;
-            color: white !important; /* Ensure button text is always white */
+            color: var(--text-color); /* Set text color dynamically */
             text-decoration: none;
             border-radius: 20px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
             font-weight: bold;
         }
 
         .external-link a:hover {
             background-color: #45a049;
-            color: white !important; /* Ensure text stays white on hover */
         }
 
         .external-link a:active {
@@ -117,12 +116,11 @@
         /* Dark mode styles for external link */
         body.dark-mode .external-link a {
             background-color: #03dac6;
-            color: white !important; /* Force white text in dark mode */
+            color: var(--text-color); /* Use dynamic text color */
         }
 
         body.dark-mode .external-link a:hover {
             background-color: #00bfa5;
-            color: white !important; /* Ensure text stays white on hover in dark mode */
         }
 
         body.dark-mode .external-link a:active {
