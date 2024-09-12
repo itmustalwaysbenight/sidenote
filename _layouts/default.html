@@ -140,7 +140,7 @@
     </header>
 
     <main>
-        <!-- Title and Date -->
+        <!-- Only one title and date will be displayed here -->
         <h1>{{ page.title }}</h1>
         
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -154,9 +154,10 @@
             {% endif %}
         </div>
     
-        <!-- Post content (without redundant title and date) -->
+        <!-- Post content without any title or date inside -->
         {{ content }}
     </main>
+    
     
     
     
