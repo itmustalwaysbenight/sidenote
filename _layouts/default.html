@@ -140,21 +140,24 @@
     </header>
 
     <main>
+        <!-- Title remains at the top as it is -->
         <h1>{{ page.title }}</h1>
-        
-        <!-- Add the external link if it exists -->
-        {% if page.external_url %}
-        <div class="external-link">
-            <a href="{{ page.external_url }}" target="_blank">Watch the video</a>
-        </div>
-        {% else %}
-        <div class="external-link">
-            <a class="nolink">Video not available</a>
-        </div>
-        {% endif %}
     
+        <!-- Date and Button placed inline -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p>{{ page.date | date: "%b %d, %Y" }}</p>
+            
+            {% if page.external_url %}
+            <div class="external-link" style="margin-left: auto;">
+                <a href="{{ page.external_url }}" target="_blank" style="padding: 5px 15px; font-size: 0.9em; background-color: #4CAF50; border-radius: 15px;">Watch the video</a>
+            </div>
+            {% endif %}
+        </div>
+    
+        <!-- Content of the post -->
         {{ content }}
     </main>
+    
     
 
     <footer></footer>
