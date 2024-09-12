@@ -143,10 +143,18 @@
         body.dark-mode .external-link a:active {
             background-color: #00a693;
         }
+
+        /* Keep Dark Mode button at original fixed position */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <button class="button" id="darkModeToggle">Dark Mode</button>
+    <button class="button dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
 
     <header>
         <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
