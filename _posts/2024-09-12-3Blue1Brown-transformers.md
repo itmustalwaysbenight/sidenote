@@ -4,54 +4,57 @@ title: "Understanding transformers"
 date: 2024-09-12
 ---
 
-# Attention in Transformers, Visually Explained: Summary and Insights
+# Summary of Attention in Transformers, Visually Explained
 
-I recently watched a video lecture titled *Attention in Transformers, Visually Explained*, and this post documents my learning process. The goal is to break down the key concepts in a conversational but accurate manner, demonstrating my understanding of attention mechanisms in transformers.
+I watched and summarized the video *Attention in Transformers, Visually Explained*. The video breaks down the attention mechanism, a critical component of transformers, widely used in modern AI systems.
 
-## Transformers and Their Context
+## What is Attention?
 
-Transformers play a central role in modern AI, especially in large language models (LLMs). They were first introduced in the 2017 paper titled *Attention is All You Need*. The main job of a transformer is to predict the next word in a sequence of text by using a mechanism called **attention**.
+Transformers, introduced in the paper *Attention is All You Need*, are designed to predict the next token in a sequence. The key innovation is the attention mechanism, which adjusts word embeddings based on the surrounding context. Initially, each token is associated with a high-dimensional vector, known as an embedding. But without attention, these embeddings lack context.
 
-The input to a transformer is split into **tokens**—often words or subwords—and each token is mapped to a high-dimensional vector, called an **embedding**. These embeddings carry semantic meaning, like how certain directions in this space can represent gender, such as the difference between masculine and feminine nouns. The transformer’s job is to refine these embeddings to include not just the word itself, but also its context.
+For example, the word *mole* has different meanings based on the surrounding words: "American true mole", "one mole of carbon dioxide", and "take a biopsy of the mole". The attention mechanism helps refine these embeddings by pulling in relevant context.
 
-## Motivation for Attention
+## Queries, Keys, and Values
 
-One key issue attention addresses is ambiguity in word meaning based on context. Consider the word *mole*:
-- "American true mole"
-- "One mole of carbon dioxide"
-- "Take a biopsy of the mole"
+Attention operates using three primary matrices:
+- **Query (Q)**: Represents the current word's request for context.
+- **Key (K)**: Contains information from the surrounding words.
+- **Value (V)**: Holds the information that will be transferred if there is a match.
 
-In these examples, *mole* means different things, but the initial embedding doesn’t reflect that—it only encodes the word itself. Attention enables the model to adjust the embedding so that it reflects the specific meaning based on context.
+Each word's embedding generates a query vector \\( Q \\) by multiplying the embedding by the query matrix \\( W_q \\). Similarly, the key vector \\( K \\) is produced by multiplying the embedding by the key matrix \\( W_k \\), and the value vector \\( V \\) is derived by multiplying the embedding by the value matrix \\( W_v \\).
 
-## How Attention Works
+The alignment between queries and keys is computed through the dot product:
+$$
+q_i \cdot k_j
+$$
+This forms a grid of dot products, with each dot product representing how much attention one word should pay to another.
 
-Let’s take a basic example: “a fluffy blue creature roamed the verdant forest.” The adjectives *fluffy* and *blue* should modify the meaning of *creature*. After the initial token embeddings, attention allows the transformer to update the meaning of *creature* by incorporating the context provided by its adjectives.
+## The Attention Pattern
 
-### Query, Key, and Value Mechanism
+These dot products are normalized using a softmax function to ensure that the attention weights sum to 1:
+$$
+\text{softmax}\left( \frac{q_i \cdot k_j}{\sqrt{d_k}} \right)
+$$
+Here, \\( d_k \\) is the dimension of the key space, which stabilizes the computation. The normalized attention weights are then used to take a weighted sum of the value vectors:
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V
+$$
 
-The attention mechanism works through three vectors for each token:
-1. **Query vector** (\( q \)): A compressed vector that helps identify relevant tokens.
-2. **Key vector** (\( k \)): A vector that encodes the ability of a token to answer queries.
-3. **Value vector** (\( v \)): The information passed to other tokens.
+## Masking and Scaling
 
-These vectors are computed using matrices of learnable parameters. For example, the **query matrix** (\( W_q \)) multiplies the embedding to produce the query vector \( q \), which helps the model "ask" if certain words (like adjectives) are relevant.
+During training, transformers predict multiple next tokens in parallel, so we mask out future tokens to avoid "leaking" information from later tokens. This is done by setting certain values in the attention grid to negative infinity before applying softmax, ensuring that the future doesn't influence the past.
 
-The **dot product** of the query and key vectors determines how closely aligned two words are, i.e., how much one word attends to another. These dot products are scaled and then passed through a **softmax** function, which normalizes them to a probability distribution.
+## Multi-Headed Attention
 
-Finally, the **value vectors** are used to update the embeddings. For instance, the value vector of *fluffy* is added to *creature*’s embedding, refining its meaning to something closer to a “fluffy creature.”
+Rather than applying a single attention mechanism, transformers use *multi-headed attention*, which runs multiple attention mechanisms in parallel. Each head has its own query, key, and value matrices, allowing the model to focus on different aspects of the context simultaneously. GPT-3, for instance, uses 96 attention heads per block. 
 
-### Multi-Headed Attention
+## Counting Parameters
 
-A single **attention head** as described above handles one aspect of contextual updating, such as adjective-noun relationships. However, transformers use **multi-headed attention**, where multiple attention heads run in parallel, each capturing different patterns. For example, one head might focus on adjectives while another tracks syntactic relationships like subject-verb dependencies.
+The video provides a parameter count for the attention mechanism. Each query, key, and value matrix in a single attention head has dimensions of \\( d_{model} \\times d_{k} \\). In GPT-3, these dimensions lead to millions of parameters, especially when scaled across 96 attention heads and 96 layers.
 
-In large models like GPT-3, there can be **96 attention heads** per layer, all working simultaneously, enabling the model to capture a wide array of relationships and nuances.
+In practice, the value matrix is factored into two smaller matrices:
+1. **Value down matrix**: Projects the value vector to a smaller space.
+2. **Value up matrix**: Maps the smaller vector back to the original embedding space.
 
-### The Cost of Attention
+This reduces the number of parameters while maintaining flexibility.
 
-The size of the attention pattern scales with the **square of the context size**, which can become computationally expensive as the context window grows. Increasing the context size is a key challenge in scaling large models, but innovations in this area aim to make larger contexts more efficient.
-
-## Final Thoughts
-
-The attention mechanism is both powerful and parallelizable, making it essential for the scalability of transformers. By enabling models to learn rich contextual relationships, attention helps refine word embeddings, allowing the model to accurately predict the next token based on the broader context.
-
-Watching this lecture deepened my understanding of transformers and attention, especially the nuances of the **query-key-value** structure and how multi-headed attention enhances the model's ability to capture complex relationships in text.
