@@ -92,10 +92,10 @@
             display: inline-block;
             padding: 10px 20px;
             background-color: #4CAF50;
-            color: white;
+            color: var(--text-color); /* Use global text color for button text */
             text-decoration: none;
             border-radius: 20px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
             font-weight: bold;
         }
 
@@ -115,7 +115,7 @@
 
         body.dark-mode .external-link a {
             background-color: #03dac6;
-            color: black;
+            color: var(--text-color); /* Use global text color for dark mode button text */
         }
 
         body.dark-mode .external-link a:hover {
@@ -153,11 +153,6 @@
         {{ content }}
     </main>
     
-    
-    
-    
-    
-
     <footer></footer>
 
     <script>
