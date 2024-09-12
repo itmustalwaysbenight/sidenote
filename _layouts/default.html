@@ -67,7 +67,7 @@
         /* Button styling shared for both "Dark Mode" and "Watch the video" */
         .button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #4CAF50; /* Green in both light and dark mode */
             color: var(--text-color);
             border: none;
             border-radius: 20px;
@@ -114,34 +114,34 @@
             background-color: #3e8e41;
         }
 
-        /* Dark mode styles for both buttons */
+        /* Dark mode styles for buttons */
         body.dark-mode .button {
-            background-color: #03dac6;
+            background-color: #4CAF50; /* Ensure button stays green in dark mode */
             color: white !important;
         }
 
         body.dark-mode .button:hover {
-            background-color: #00bfa5;
+            background-color: #45a049;
             color: white !important;
         }
 
         body.dark-mode .button:active {
-            background-color: #00a693;
+            background-color: #3e8e41;
         }
 
         /* Dark mode styles for external link */
         body.dark-mode .external-link a {
-            background-color: #03dac6;
+            background-color: #4CAF50; /* Keep green in dark mode */
             color: white !important; /* Force white text in dark mode */
         }
 
         body.dark-mode .external-link a:hover {
-            background-color: #00bfa5;
+            background-color: #45a049;
             color: white !important; /* Ensure white text on hover in dark mode */
         }
 
         body.dark-mode .external-link a:active {
-            background-color: #00a693;
+            background-color: #3e8e41;
         }
 
         /* Keep Dark Mode button at original fixed position */
