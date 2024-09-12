@@ -92,15 +92,16 @@
             display: inline-block;
             padding: 10px 20px;
             background-color: #4CAF50;
-            color: var(--text-color); /* Use global text color for button text */
+            color: white !important; /* Ensure button text is always white */
             text-decoration: none;
             border-radius: 20px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease;
             font-weight: bold;
         }
 
         .external-link a:hover {
             background-color: #45a049;
+            color: white !important; /* Ensure text stays white on hover */
         }
 
         .external-link a:active {
@@ -113,13 +114,15 @@
             cursor: not-allowed;
         }
 
+        /* Dark mode styles for external link */
         body.dark-mode .external-link a {
             background-color: #03dac6;
-            color: var(--text-color); /* Use global text color for dark mode button text */
+            color: white !important; /* Force white text in dark mode */
         }
 
         body.dark-mode .external-link a:hover {
             background-color: #00bfa5;
+            color: white !important; /* Ensure text stays white on hover in dark mode */
         }
 
         body.dark-mode .external-link a:active {
