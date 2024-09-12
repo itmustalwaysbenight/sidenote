@@ -75,7 +75,7 @@
             padding: 10px 20px;
             cursor: pointer;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         .dark-mode-toggle:hover {
@@ -95,12 +95,13 @@
             color: var(--text-color); /* Set text color dynamically */
             text-decoration: none;
             border-radius: 20px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease; /* Remove color transition */
             font-weight: bold;
         }
 
         .external-link a:hover {
             background-color: #45a049;
+            color: var(--text-color) !important; /* Ensure text color stays the same */
         }
 
         .external-link a:active {
