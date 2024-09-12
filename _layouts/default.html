@@ -140,13 +140,8 @@
     </header>
 
     <main>
-        <!-- Only one title and date will be displayed here -->
-        <h1>{{ page.title }}</h1>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <p>{{ page.date | date: "%b %d, %Y" }}</p>
-    
-            <!-- External link button -->
+        <!-- Only keep the watch button -->
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
             {% if page.external_url %}
             <div class="external-link" style="margin-left: auto;">
                 <a href="{{ page.external_url }}" target="_blank" style="padding: 5px 15px; font-size: 0.9em; background-color: #4CAF50; border-radius: 15px;">Watch the video</a>
@@ -154,9 +149,10 @@
             {% endif %}
         </div>
     
-        <!-- Post content without any title or date inside -->
+        <!-- Post content (Jekyll will render title and date automatically) -->
         {{ content }}
     </main>
+    
     
     
     
