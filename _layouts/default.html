@@ -64,25 +64,31 @@
             margin-top: 40px;
         }
 
-        .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        /* Button styling shared for both "Dark Mode" and "Watch the video" */
+        .button {
+            padding: 10px 20px;
             background-color: #4CAF50;
-            color: var(--text-color); /* Ensure text color follows the mode */
+            color: var(--text-color);
             border: none;
             border-radius: 20px;
-            padding: 10px 20px;
             cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
+            display: inline-block;
         }
 
-        .dark-mode-toggle:hover {
+        .button:hover {
             background-color: #45a049;
+            color: var(--text-color) !important;
         }
 
-        /* External link block styling */
+        .button:active {
+            background-color: #3e8e41;
+        }
+
+        /* External link button */
         .external-link {
             margin-top: 20px;
             text-align: center;
@@ -108,10 +114,19 @@
             background-color: #3e8e41;
         }
 
-        .external-link a.nolink {
-            background-color: #ccc;
-            color: #888;
-            cursor: not-allowed;
+        /* Dark mode styles for both buttons */
+        body.dark-mode .button {
+            background-color: #03dac6;
+            color: white !important;
+        }
+
+        body.dark-mode .button:hover {
+            background-color: #00bfa5;
+            color: white !important;
+        }
+
+        body.dark-mode .button:active {
+            background-color: #00a693;
         }
 
         /* Dark mode styles for external link */
@@ -128,15 +143,10 @@
         body.dark-mode .external-link a:active {
             background-color: #00a693;
         }
-
-        body.dark-mode .external-link a.nolink {
-            background-color: #666;
-            color: #bbb;
-        }
     </style>
 </head>
 <body>
-    <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+    <button class="button" id="darkModeToggle">Dark Mode</button>
 
     <header>
         <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
@@ -147,7 +157,7 @@
         <div style="display: flex; justify-content: flex-end; align-items: center;">
             {% if page.external_url %}
             <div class="external-link" style="margin-left: auto;">
-                <a href="{{ page.external_url }}" target="_blank" style="padding: 5px 15px; font-size: 0.9em; background-color: #4CAF50; border-radius: 15px;">Watch the video</a>
+                <a href="{{ page.external_url }}" target="_blank" class="button" style="font-size: 0.9em;">Watch the video</a>
             </div>
             {% endif %}
         </div>
