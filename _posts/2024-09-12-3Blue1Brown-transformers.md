@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Understanding transformers"
+title: "Understanding Transformers"
 date: 2024-09-12
 ---
 
