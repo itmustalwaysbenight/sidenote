@@ -15,7 +15,7 @@
 
         body.dark-mode {
             --background-color: #121212;
-            --text-color: white; /* Now this ensures white text in dark mode */
+            --text-color: white; /* Ensure white text in dark mode */
             --link-color: #bb86fc;
             --link-hover-color: #03dac6;
             --separator-gradient: linear-gradient(90deg, #ff0066, #00ffcc, #00ff66);
@@ -116,11 +116,12 @@
         /* Dark mode styles for external link */
         body.dark-mode .external-link a {
             background-color: #03dac6;
-            color: var(--text-color); /* Use dynamic text color */
+            color: white !important; /* Force white text in dark mode */
         }
 
         body.dark-mode .external-link a:hover {
             background-color: #00bfa5;
+            color: white !important; /* Ensure white text on hover in dark mode */
         }
 
         body.dark-mode .external-link a:active {
