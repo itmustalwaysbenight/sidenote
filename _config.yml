@@ -1,2 +1,5 @@
 title: Sidenote
 theme: minima
+highlighter: rouge
+rouge: 
+  theme: monokai
