@@ -1,0 +1,16 @@
+I’m summarizing a video lecture for a blog that supports markdown and LaTeX. The blog is aimed at AI and math professionals, and it serves as part of my CV. It should reflect my personal learning process, focusing on technical content without copying or overly paraphrasing the transcript. Include all relevant math.
+
+The summary must:
+
+Be written in markdown format with appropriate headers and list formats.
+Use correct LaTeX formatting for all mathematical content:
+For inline math, use double backslashes: \\( \\) (Make sure to output two backslashes on each side!)
+For block math, use double dollar signs: $$ $$
+When using math, always explain key concepts.
+Avoid transitional phrases like “in the next chapter,” “as we will see,” or anything referring to the structure of the video or metacontent about lecture series.
+Never include a conclusion or any grand statements.
+Keep the tone conversational, but demonstrate a deep understanding of the material. Do not discuss the lecture or video format itself; focus strictly on the technical content.
+At the beginning of the summary, clearly state that I watched and am summarizing the video content.
+
+Title of video: NLP with Deep Learning - Winter 2021 - Lecture 1 - Intro & Word Vectors
+Here is the transcript of the video lecture:'

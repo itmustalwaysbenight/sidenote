@@ -1,15 +1,17 @@
 {
-  "name": "sidenote",
-  "version": "1.0.0",
-  "description": "Netlify functions for sidenote site",
-  "main": "index.js",
-  "scripts": {
-    "build": "echo \"Build step not defined\""
-  },
-  "dependencies": {
-    "openai": "^3.0.0"  // Ensure this version is up to date with your needs
-  },
-  "engines": {
-    "node": ">=16"
+    "name": "sidenote-netlify-functions",
+    "version": "1.0.0",
+    "description": "Netlify functions for interacting with OpenAI API",
+    "main": "index.js",
+    "scripts": {
+      "build": "echo \"Build step not defined\""
+    },
+    "dependencies": {
+      "openai": "^3.0.0",  
+      "node-fetch": "^2.6.7" 
+    },
+    "engines": {
+      "node": ">=16"  
+    }
   }
-}
+  
