@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
+    
     <!-- Prism.js CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
 
@@ -46,9 +47,23 @@
             font-family: 'Arial', sans-serif;
         }
 
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
+        pre[class*="language-"] {
+            background-color: #2d2d2d;  /* Dark background for code */
+            color: #f8f8f2;  /* Light text for code readability */
+            padding: 15px;
+            border-radius: 8px; /* Smooth rounded corners */
+            font-size: 0.95em;
+            overflow-x: auto; /* Handle long lines smoothly */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add space between code blocks and content */
+        }
+
+        code {
+            background-color: #2d2d2d;  /* Dark background for inline code */
+            color: #f8f8f2;  /* Light text for inline code */
+            padding: 2px 5px;
+            border-radius: 4px;
         }
 
         a, a:visited, a:active {
@@ -160,24 +175,6 @@
             top: 20px;
             right: 20px;
             font-weight: bold;
-        }
-        pre[class*="language-"] {
-            background-color: #2d2d2d;  /* Dark background for code */
-            color: #f8f8f2;  /* Light text for code readability */
-            padding: 15px;
-            border-radius: 8px; /* Smooth rounded corners */
-            font-size: 0.95em;
-            overflow-x: auto; /* Handle long lines smoothly */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            margin-bottom: 1.5rem;  /* Space below the code blocks */
-        }
-
-        /* Ensure inline code is consistent */
-        code {
-            background-color: #f4f4f4;
-            color: #333;
-            padding: 2px 5px;
-            border-radius: 4px;
         }
 
     </style>
