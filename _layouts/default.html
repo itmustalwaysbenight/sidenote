@@ -5,7 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <style>
-        /* Add styles for the chat popup and button */
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --link-color: black;
+            --link-hover-color: #4CAF50;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Arial', sans-serif;
+        }
+
+        a, a:visited, a:active {
+            color: var(--link-color) !important;
+            text-decoration: none !important;
+        }
+
+        a:hover {
+            color: var(--link-hover-color) !important;
+            text-decoration: none !important;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Button styling shared for chat */
         .chat-button {
             position: fixed;
             bottom: 20px;
@@ -57,12 +94,22 @@
     </style>
 </head>
 <body>
-    <!-- Existing content -->
 
-    <!-- Chat button -->
+    <header>
+        <h1><a href="{{ site.url }}">{{ site.title }}</a></h1>
+    </header>
+
+    <main>
+        {{ content }}
+    </main>
+
+    <footer>
+        {{ site.footer }}
+    </footer>
+
+    <!-- Chat button and popup go here, after the main content -->
     <button class="chat-button" id="chatButton">💬</button>
 
-    <!-- Chat popup -->
     <div class="chat-popup" id="chatPopup">
         <span class="close-chat" id="closeChat">&times;</span>
         <h3>Chat with OpenAI</h3>
@@ -71,7 +118,6 @@
         <div id="chatResponse" style="margin-top: 10px; color: #333;"></div>
     </div>
 
-    <!-- Scripts -->
     <script>
         const chatButton = document.getElementById('chatButton');
         const chatPopup = document.getElementById('chatPopup');
@@ -116,5 +162,6 @@
             chatMessage.value = '';
         });
     </script>
+
 </body>
 </html>
