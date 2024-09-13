@@ -10,6 +10,15 @@
             --text-color: black;
             --link-color: black;
             --link-hover-color: #4CAF50;
+            --separator-gradient: linear-gradient(90deg, #ff0066, #0099ff, #00ff99);
+        }
+
+        body.dark-mode {
+            --background-color: #121212;
+            --text-color: white; /* Ensure white text in dark mode */
+            --link-color: #bb86fc;
+            --link-hover-color: #03dac6;
+            --separator-gradient: linear-gradient(90deg, #ff0066, #00ffcc, #00ff66);
         }
 
         body {
@@ -27,6 +36,11 @@
             font-family: 'Arial', sans-serif;
         }
 
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+
         a, a:visited, a:active {
             color: var(--link-color) !important;
             text-decoration: none !important;
@@ -37,131 +51,156 @@
             text-decoration: none !important;
         }
 
+        .separator {
+            height: 3px;
+            background: var(--separator-gradient);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 1.5px;
+        }
+
         footer {
             text-align: center;
             margin-top: 40px;
         }
 
-        /* Button styling shared for chat */
-        .chat-button {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: #4CAF50;
-            color: white;
+        /* Button styling shared for both "Dark Mode" and "Watch the video" */
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Green in both light and dark mode */
+            color: var(--text-color);
             border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
+            border-radius: 20px;
             cursor: pointer;
-            z-index: 1000;
-        }
-
-        .chat-popup {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
-            border: 2px solid #4CAF50;
-            background-color: white;
-            padding: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            display: inline-block;
         }
 
-        .chat-popup textarea {
-            width: 100%;
-            height: 100px;
+        .button:hover {
+            background-color: #45a049;
+            color: var(--text-color) !important;
         }
 
-        .chat-popup button {
+        .button:active {
+            background-color: #3e8e41;
+        }
+
+        /* External link button */
+        .external-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .external-link a {
+            display: inline-block;
+            padding: 10px 20px;
             background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
+            color: var(--text-color); /* Set text color dynamically */
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s ease; /* Remove color transition */
+            font-weight: bold;
         }
 
-        .close-chat {
-            cursor: pointer;
-            font-size: 18px;
-            position: absolute;
-            right: 10px;
-            top: 5px;
+        .external-link a:hover {
+            background-color: #45a049;
+            color: var(--text-color) !important; /* Ensure text color stays the same */
+        }
+
+        .external-link a:active {
+            background-color: #3e8e41;
+        }
+
+        /* Dark mode styles for buttons */
+        body.dark-mode .button {
+            background-color: #4CAF50; /* Ensure button stays green in dark mode */
+            color: white !important;
+        }
+
+        body.dark-mode .button:hover {
+            background-color: #45a049;
+            color: white !important;
+        }
+
+        body.dark-mode .button:active {
+            background-color: #3e8e41;
+        }
+
+        /* Dark mode styles for external link */
+        body.dark-mode .external-link a {
+            background-color: #4CAF50; /* Keep green in dark mode */
+            color: white !important; /* Force white text in dark mode */
+        }
+
+        body.dark-mode .external-link a:hover {
+            background-color: #45a049;
+            color: white !important; /* Ensure white text on hover in dark mode */
+        }
+
+        body.dark-mode .external-link a:active {
+            background-color: #3e8e41;
+        }
+
+        /* Keep Dark Mode button at original fixed position */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
+    <button class="button dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
 
     <header>
-        <h1><a href="{{ site.url }}">{{ site.title }}</a></h1>
+        <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
     </header>
 
     <main>
+        <!-- Only keep the watch button -->
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
+            {% if page.external_url %}
+            <div class="external-link" style="margin-left: auto;">
+                <a href="{{ page.external_url }}" target="_blank" class="button" style="font-size: 0.9em;">Watch the video</a>
+            </div>
+            {% endif %}
+        </div>
+    
+        <!-- Post content (Jekyll will render title and date automatically) -->
         {{ content }}
     </main>
-
-    <footer>
-        {{ site.footer }}
-    </footer>
-
-    <!-- Chat button and popup go here, after the main content -->
-    <button class="chat-button" id="chatButton">💬</button>
-
-    <div class="chat-popup" id="chatPopup">
-        <span class="close-chat" id="closeChat">&times;</span>
-        <h3>Chat with OpenAI</h3>
-        <textarea id="chatMessage" placeholder="Type your message here..."></textarea>
-        <button id="sendChatMessage">Send</button>
-        <div id="chatResponse" style="margin-top: 10px; color: #333;"></div>
-    </div>
+    
+    <footer></footer>
 
     <script>
-        const chatButton = document.getElementById('chatButton');
-        const chatPopup = document.getElementById('chatPopup');
-        const closeChat = document.getElementById('closeChat');
-        const sendChatMessage = document.getElementById('sendChatMessage');
-        const chatResponse = document.getElementById('chatResponse');
-        const chatMessage = document.getElementById('chatMessage');
+        const toggleButton = document.getElementById('darkModeToggle');
+        const body = document.body;
 
-        // Show chat popup when button is clicked
-        chatButton.addEventListener('click', () => {
-            chatPopup.style.display = 'block';
-        });
+        // Check if dark mode is already enabled in localStorage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggleButton.textContent = 'Light Mode';
+        }
 
-        // Close chat popup
-        closeChat.addEventListener('click', () => {
-            chatPopup.style.display = 'none';
-        });
-
-        // Handle sending the message to OpenAI
-        sendChatMessage.addEventListener('click', async () => {
-            const userMessage = chatMessage.value.trim();
-            if (!userMessage) return;
-
-            // Clear previous response
-            chatResponse.innerText = 'Loading...';
-
-            // Send the message to the serverless function (same as before)
-            const response = await fetch('/.netlify/functions/openai-chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query: userMessage })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                chatResponse.innerText = 'AI: ' + data.reply;
+        // Event listener for dark mode toggle button
+        toggleButton.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = 'Light Mode';
+                localStorage.setItem('darkMode', 'enabled');
             } else {
-                chatResponse.innerText = 'Error: Unable to fetch response from OpenAI.';
+                toggleButton.textContent = 'Dark Mode';
+                localStorage.setItem('darkMode', 'disabled');
             }
-
-            // Clear input
-            chatMessage.value = '';
         });
     </script>
 
+    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </body>
 </html>
