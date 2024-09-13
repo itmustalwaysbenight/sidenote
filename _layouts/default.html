@@ -6,7 +6,7 @@
     <title>{{ page.title }}</title>
     
     <!-- Prism.js CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" /> <!-- Okaidia theme for dark background -->
 
     <!-- Prism.js JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
@@ -14,6 +14,9 @@
     <!-- Include specific language support -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+    <!-- Clipboard.js for "Copy code" functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
 
     <style>
         :root {
@@ -47,30 +50,31 @@
             font-family: 'Arial', sans-serif;
         }
 
-        pre {
-            background-color: #f4f4f4;  /* Default light background */
-            padding: 10px;
+        pre[class*="language-"] {
+            background-color: #2d2d2d;  /* Dark background for code */
+            color: #f8f8f2;  /* Light text for code readability */
+            padding: 15px;
+            border-radius: 8px; /* Smooth rounded corners */
+            font-size: 0.95em;
+            overflow-x: auto; /* Handle long lines smoothly */
+            position: relative;
+        }
+
+        /* Styling for the "Copy" button */
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
             border-radius: 5px;
-            font-size: 1em;
-            overflow-x: auto;
-            color: #333; /* Default dark text color */
+            cursor: pointer;
         }
 
-        code {
-            background-color: #000000;  /* Default background for inline code */
-            color: #ffffff;
-            padding: 2px 5px;
-            border-radius: 4px;
-        }
-
-        a, a:visited, a:active {
-            color: var(--link-color) !important;
-            text-decoration: none !important;
-        }
-
-        a:hover {
-            color: var(--link-hover-color) !important;
-            text-decoration: none !important;
+        .copy-button:hover {
+            background-color: #45a049;
         }
 
         .separator {
@@ -85,95 +89,6 @@
             text-align: center;
             margin-top: 40px;
         }
-
-        /* Button styling shared for both "Dark Mode" and "Watch the video" */
-        .button {
-            padding: 10px 20px;
-            background-color: #4CAF50; /* Green in both light and dark mode */
-            color: var(--text-color);
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            display: inline-block;
-        }
-
-        .button:hover {
-            background-color: #45a049;
-            color: var(--text-color) !important;
-        }
-
-        .button:active {
-            background-color: #3e8e41;
-        }
-
-        /* External link button */
-        .external-link {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .external-link a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: var(--text-color); /* Set text color dynamically */
-            text-decoration: none;
-            border-radius: 20px;
-            transition: background-color 0.3s ease; /* Remove color transition */
-            font-weight: bold;
-        }
-
-        .external-link a:hover {
-            background-color: #45a049;
-            color: var(--text-color) !important; /* Ensure text color stays the same */
-        }
-
-        .external-link a:active {
-            background-color: #3e8e41;
-        }
-
-        /* Dark mode styles for buttons */
-        body.dark-mode .button {
-            background-color: #4CAF50; /* Ensure button stays green in dark mode */
-            color: white !important;
-        }
-
-        body.dark-mode .button:hover {
-            background-color: #45a049;
-            color: white !important;
-        }
-
-        body.dark-mode .button:active {
-            background-color: #3e8e41;
-        }
-
-        /* Dark mode styles for external link */
-        body.dark-mode .external-link a {
-            background-color: #4CAF50; /* Keep green in dark mode */
-            color: white !important; /* Force white text in dark mode */
-        }
-
-        body.dark-mode .external-link a:hover {
-            background-color: #45a049;
-            color: white !important; /* Ensure white text on hover in dark mode */
-        }
-
-        body.dark-mode .external-link a:active {
-            background-color: #3e8e41;
-        }
-
-        /* Keep Dark Mode button at original fixed position */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-weight: bold;
-        }
-
     </style>
 </head>
 <body>
@@ -219,6 +134,28 @@
                 toggleButton.textContent = 'Dark Mode';
                 localStorage.setItem('darkMode', 'disabled');
             }
+        });
+
+        // Clipboard.js to add "Copy code" functionality
+        document.querySelectorAll('pre').forEach((block) => {
+            const copyButton = document.createElement('button');
+            copyButton.innerText = 'Copy';
+            copyButton.classList.add('copy-button');
+            block.appendChild(copyButton);
+
+            const clipboard = new ClipboardJS(copyButton, {
+                target: function(trigger) {
+                    return trigger.previousElementSibling;
+                }
+            });
+
+            clipboard.on('success', function(e) {
+                e.clearSelection();
+                e.trigger.innerText = 'Copied!';
+                setTimeout(() => {
+                    e.trigger.innerText = 'Copy';
+                }, 2000);
+            });
         });
     </script>
 
