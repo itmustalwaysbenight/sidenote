@@ -25,15 +25,10 @@ $$
 
 Where \\( \theta \\) is the angle between the vectors. It's positive if they point in the same direction, zero if perpendicular, and negative if in opposite directions.
 
-## Connection to Projections
-Dot products are fundamentally related to projecting one vector onto another. Taking the dot product with a unit vector gives the projection's length.
+## Testing code blocks
 
-## Duality and Linear Transformations
-The dot product relates vectors and transformations. Any linear transformation that projects a vector to a number can be expressed using a dot product:
-
-$$
-\mathbf{T}(\mathbf{v}) = \mathbf{v} \cdot \mathbf{u}
-$$
-
-## Conclusion
-The dot product isn't just about multiplying vectors—it's key to understanding projections and linear transformations.
+```python
+# Python example code
+def hello_world():
+    print("Hello, world!")
+```
