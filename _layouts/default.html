@@ -140,15 +140,15 @@
     </header>
 
     <main>
-        <!-- External link button (only displays if 'external_url' is set in the page front matter) -->
+        <!-- Page content -->
+        {{ content }}
+
+        <!-- External link button moved to the end of the post content -->
         {% if page.external_url %}
         <div class="external-link">
             <a href="{{ page.external_url }}" target="_blank" rel="noopener noreferrer" class="button">Watch the video</a>
         </div>
         {% endif %}
-
-        <!-- Page content -->
-        {{ content }}
     </main>
 
     <footer></footer>
