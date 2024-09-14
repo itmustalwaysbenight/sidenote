@@ -2,75 +2,17 @@
 layout: default
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidenote</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        h1, h2, h3 {
-            font-family: 'Arial', sans-serif;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-        }
-        a, a:visited, a:active {
-            color: black !important;
-            text-decoration: none !important;
-        }
-        a:hover {
-            color: #4CAF50 !important;
-            text-decoration: none !important;
-        }
-        .separator {
-            height: 3px;
-            background: linear-gradient(to right, #ff5f6d, #ffc371);
-            margin-top: 20px;
-            margin-bottom: 20px;
-            border-radius: 1.5px;
-        }
+<header></header>
 
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
-        body.dark-mode a {
-            color: #bbbbbb !important;
-        }
-        body.dark-mode pre {
-            background-color: #333;
-        }
-    </style>
-</head>
-<body>
-    <header></header>
+<main>
+    {% for post in site.posts %}
+    <article>
+        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <p>{{ post.content | markdownify | truncatewords: 100 }}</p>
+        <p><a href="{{ post.url }}">Read more...</a></p>
+    </article>
+    <div class="separator"></div>
+    {% endfor %}
+</main>
 
-    <main>
-        {% for post in site.posts %}
-        <article>
-            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-            <p>{{ post.content | truncatewords: 100 }}</p>
-            <p><a href="{{ post.url }}">Read more...</a></p>
-        </article>
-        <div class="separator"></div>
-        {% endfor %}
-    </main>
-
-    <footer></footer>
-
-    <script type="text/javascript" async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
-</body>
-</html>
+<footer></footer>

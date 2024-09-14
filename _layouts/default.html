@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }}</title>
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="website">
+    <!-- Include other relevant Open Graph and Twitter Card tags -->
+
+    <!-- Optional: Include a web font -->
+    <!--
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    -->
+
     <style>
         :root {
             --background-color: white;
@@ -11,14 +24,22 @@
             --link-color: black;
             --link-hover-color: #4CAF50;
             --separator-gradient: linear-gradient(90deg, #ff0066, #0099ff, #00ff99);
+            --button-background-color: white;
+            --button-text-color: black;
+            --button-border-color: black;
+            --button-hover-background: #f0f0f0;
         }
 
         body.dark-mode {
             --background-color: #121212;
-            --text-color: white; /* Ensure white text in dark mode */
+            --text-color: white;
             --link-color: #bb86fc;
             --link-hover-color: #03dac6;
             --separator-gradient: linear-gradient(90deg, #ff0066, #00ffcc, #00ff66);
+            --button-background-color: #333333;
+            --button-text-color: white;
+            --button-border-color: white;
+            --button-hover-background: #444444;
         }
 
         body {
@@ -39,6 +60,7 @@
         pre {
             background-color: #f4f4f4;
             padding: 10px;
+            overflow-x: auto;
         }
 
         a, a:visited, a:active {
@@ -64,28 +86,28 @@
             margin-top: 40px;
         }
 
-        /* Button styling shared for both "Dark Mode" and "Watch the video" */
+        /* Button styling */
         .button {
             padding: 10px 20px;
-            background-color: #4CAF50; /* Green in both light and dark mode */
-            color: var(--text-color);
-            border: none;
-            border-radius: 20px;
+            background-color: var(--button-background-color);
+            color: var(--button-text-color);
+            border: 2px solid var(--button-border-color);
+            border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
             text-decoration: none;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             display: inline-block;
         }
 
         .button:hover {
-            background-color: #45a049;
-            color: var(--text-color) !important;
+            background-color: var(--button-hover-background);
+            border-color: var(--link-hover-color);
         }
 
         .button:active {
-            background-color: #3e8e41;
+            background-color: var(--button-hover-background);
         }
 
         /* External link button */
@@ -94,111 +116,73 @@
             text-align: center;
         }
 
-        .external-link a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: var(--text-color); /* Set text color dynamically */
-            text-decoration: none;
-            border-radius: 20px;
-            transition: background-color 0.3s ease; /* Remove color transition */
-            font-weight: bold;
-        }
-
-        .external-link a:hover {
-            background-color: #45a049;
-            color: var(--text-color) !important; /* Ensure text color stays the same */
-        }
-
-        .external-link a:active {
-            background-color: #3e8e41;
-        }
-
-        /* Dark mode styles for buttons */
-        body.dark-mode .button {
-            background-color: #4CAF50; /* Ensure button stays green in dark mode */
-            color: white !important;
-        }
-
-        body.dark-mode .button:hover {
-            background-color: #45a049;
-            color: white !important;
-        }
-
-        body.dark-mode .button:active {
-            background-color: #3e8e41;
-        }
-
-        /* Dark mode styles for external link */
-        body.dark-mode .external-link a {
-            background-color: #4CAF50; /* Keep green in dark mode */
-            color: white !important; /* Force white text in dark mode */
-        }
-
-        body.dark-mode .external-link a:hover {
-            background-color: #45a049;
-            color: white !important; /* Ensure white text on hover in dark mode */
-        }
-
-        body.dark-mode .external-link a:active {
-            background-color: #3e8e41;
-        }
-
-        /* Keep Dark Mode button at original fixed position */
+        /* Dark mode toggle button */
         .dark-mode-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
             font-weight: bold;
         }
+
+        /* Accessibility: focus states */
+        a:focus,
+        .button:focus {
+            outline: 2px solid var(--link-hover-color);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
-    <button class="button dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+    <button class="button dark-mode-toggle" id="darkModeToggle" aria-label="Switch to dark mode">Dark Mode</button>
 
     <header>
-        <h1><a href="https://sidenote.live">{{ site.title }}</a></h1>
+        <h1><a href="{{ site.url }}">{{ site.title }}</a></h1>
     </header>
 
     <main>
-        <!-- Only keep the watch button -->
-        <div style="display: flex; justify-content: flex-end; align-items: center;">
-            {% if page.external_url %}
-            <div class="external-link" style="margin-left: auto;">
-                <a href="{{ page.external_url }}" target="_blank" class="button" style="font-size: 0.9em;">Watch the video</a>
-            </div>
-            {% endif %}
+        <!-- External link button (only displays if 'external_url' is set in the page front matter) -->
+        {% if page.external_url %}
+        <div class="external-link">
+            <a href="{{ page.external_url }}" target="_blank" rel="noopener noreferrer" class="button">Watch the video</a>
         </div>
-    
-        <!-- Post content (Jekyll will render title and date automatically) -->
+        {% endif %}
+
+        <!-- Page content -->
         {{ content }}
     </main>
-    
+
     <footer></footer>
 
+    <!-- Scripts -->
     <script>
-        const toggleButton = document.getElementById('darkModeToggle');
-        const body = document.body;
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('darkModeToggle');
+            const body = document.body;
 
-        // Check if dark mode is already enabled in localStorage
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
-            toggleButton.textContent = 'Light Mode';
-        }
-
-        // Event listener for dark mode toggle button
-        toggleButton.addEventListener('click', function() {
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
+            // Check if dark mode is already enabled in localStorage
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
                 toggleButton.textContent = 'Light Mode';
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                toggleButton.textContent = 'Dark Mode';
-                localStorage.setItem('darkMode', 'disabled');
+                toggleButton.setAttribute('aria-label', 'Switch to light mode');
             }
+
+            // Event listener for dark mode toggle button
+            toggleButton.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    toggleButton.textContent = 'Light Mode';
+                    toggleButton.setAttribute('aria-label', 'Switch to light mode');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    toggleButton.textContent = 'Dark Mode';
+                    toggleButton.setAttribute('aria-label', 'Switch to dark mode');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
         });
     </script>
 
+    <!-- MathJax Script -->
     <script type="text/javascript" async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
