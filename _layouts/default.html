@@ -92,14 +92,19 @@
         }
 
         /* Code block styling */
+        /* Code block styling */
         pre, code {
             background-color: var(--code-background);
             color: var(--code-text-color);
-            padding: 10px;
-            border-radius: 5px;
+            padding: 8px; /* Adjust padding for better spacing */
+            border-radius: 4px; /* Slightly smaller rounding */
             overflow-x: auto;
             font-family: monospace;
+            line-height: 1.4; /* Adjust line height for readability */
+            white-space: pre-wrap; /* Ensure text wraps within the code block */
+            word-wrap: break-word; /* Prevent text from overflowing */
         }
+
 
         a, a:visited, a:active {
             color: var(--link-color) !important;
