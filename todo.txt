@@ -1,0 +1,4 @@
+Feedback fra andreas
+1. Ha en boks som forklarer kontekst
+2. Få tydelig hierarki for titler
+3. Innfør søkefunksjon øverst
