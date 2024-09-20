@@ -28,6 +28,8 @@
             --button-text-color: black;
             --button-border-color: black;
             --button-hover-background: #f0f0f0;
+            --code-background: #f4f4f4; /* Light background for code blocks */
+            --code-text-color: black;
         }
 
         body.dark-mode {
@@ -40,6 +42,8 @@
             --button-text-color: white;
             --button-border-color: white;
             --button-hover-background: #444444;
+            --code-background: #2d2d2d; /* Dark background for code blocks */
+            --code-text-color: #e5e5e5; /* Light text for code blocks in dark mode */
         }
 
         body {
@@ -87,10 +91,14 @@
             color: var(--link-hover-color);
         }
 
-        pre {
-            background-color: #f4f4f4;
+        /* Code block styling */
+        pre, code {
+            background-color: var(--code-background);
+            color: var(--code-text-color);
             padding: 10px;
+            border-radius: 5px;
             overflow-x: auto;
+            font-family: monospace;
         }
 
         a, a:visited, a:active {
