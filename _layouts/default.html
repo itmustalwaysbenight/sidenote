@@ -28,8 +28,6 @@
             --button-text-color: black;
             --button-border-color: black;
             --button-hover-background: #f0f0f0;
-            --code-background: #f4f4f4; /* Light background for code blocks */
-            --code-text-color: black;
         }
 
         body.dark-mode {
@@ -42,8 +40,6 @@
             --button-text-color: white;
             --button-border-color: white;
             --button-hover-background: #444444;
-            --code-background: #2d2d2d; /* Dark background for code blocks */
-            --code-text-color: #e5e5e5; /* Light text for code blocks in dark mode */
         }
 
         body {
@@ -91,20 +87,17 @@
             color: var(--link-hover-color);
         }
 
-        /* Code block styling */
-        /* Code block styling */
-        pre, code {
-            background-color: var(--code-background);
-            color: var(--code-text-color);
-            padding: 8px; /* Adjust padding for better spacing */
-            border-radius: 4px; /* Slightly smaller rounding */
+        pre {
+            background-color: #f4f4f4;
+            color: black;
+            padding: 10px;
             overflow-x: auto;
-            font-family: monospace;
-            line-height: 1.4; /* Adjust line height for readability */
-            white-space: pre-wrap; /* Ensure text wraps within the code block */
-            word-wrap: break-word; /* Prevent text from overflowing */
         }
-
+        /* Code block styling for dark mode */
+        body.dark-mode pre {
+            background-color: #2d2d2d; /* Dark background for code blocks */
+            color: #f4f4f4; /* Light text for visibility in dark mode */
+        }
 
         a, a:visited, a:active {
             color: var(--link-color) !important;
