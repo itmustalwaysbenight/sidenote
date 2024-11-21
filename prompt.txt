@@ -2,11 +2,10 @@ I’m summarizing a video lecture for a blog that supports markdown and LaTeX. T
 
 The summary must:
 
-Be written in markdown format with appropriate headers and list formats.
+Be written in markdown format with appropriate headers and list formats!!!
 Use correct LaTeX formatting for all mathematical content:
 For inline math, use double backslashes: \\( \\) (Make sure to output two backslashes on each side!)
 For block math, use double dollar signs: $$ $$
-When using math, always explain key concepts.
 Avoid transitional phrases like “in the next chapter,” “as we will see,” or anything referring to the structure of the video or metacontent about lecture series.
 Never include a conclusion or any grand statements.
 Keep the tone conversational, but demonstrate a deep understanding of the material. Do not discuss the lecture or video format itself; focus strictly on the technical content.
